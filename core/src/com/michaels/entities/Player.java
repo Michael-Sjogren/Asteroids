@@ -38,7 +38,7 @@ public class Player extends SpaceEntity {
         maxSpeed = 300;
         accel = 230;
         decel = 15;
-        rotSpeed = 2.f;
+        rotSpeed = 3.f;
         
         // effect
 

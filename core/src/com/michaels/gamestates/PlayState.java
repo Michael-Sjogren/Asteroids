@@ -24,8 +24,8 @@ public class PlayState extends GameState {
     private int numAsteroidsLeft;
 
 
-    public static ArrayList<Asteroid> asteroids = new ArrayList<>();
-    private ArrayList<Bullet> enemyBullets = new ArrayList<>();
+    public static ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+    private ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -35,7 +35,7 @@ public class PlayState extends GameState {
     public void init() {
         level = 1;
         sb = new SpriteBatch();
-        ArrayList<Bullet> bullets = new ArrayList<>();
+        ArrayList<Bullet> bullets = new ArrayList<Bullet>();
         player = new Player(bullets);
         spawnAsteroids();
     }

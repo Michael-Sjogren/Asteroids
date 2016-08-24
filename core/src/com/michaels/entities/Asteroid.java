@@ -40,13 +40,8 @@ public class Asteroid extends SpaceEntity {
             default: break;
         }
 
-
-
-
         width = asteroid.getWidth();
         height = asteroid.getHeight();
-        System.out.println("Asteroid with: " + width);
-        System.out.println("Asteroid height: " + height);
 
         rotSpeed = MathUtils.random(-5f,5f);
         orginX = asteroid.getTexture().getWidth() / 2;
@@ -82,6 +77,7 @@ public class Asteroid extends SpaceEntity {
     }
 
     public void destroy() {
+    	
         switch (size){
             case LARGE:
                 for (int i = 0; i < 2; i ++){
