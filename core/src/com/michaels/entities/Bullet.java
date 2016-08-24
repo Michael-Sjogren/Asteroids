@@ -5,9 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.collision.BoundingBox;
-import com.michaels.main.BBox;
-import javafx.geometry.Bounds;
+import com.michaels.gamestates.PlayState;
+import com.michaels.main.Collision;
 
 /**
  * Created by MichaelSjogren on 2016-08-23.
@@ -15,11 +14,13 @@ import javafx.geometry.Bounds;
 public class Bullet extends SpaceEntity {
 
 
+    private final Collision collision;
     private float radians;
     private float lifeTime;
     private float lifeTimer;
     private boolean remove = false;
     private Sprite bullet;
+    private static int index = 0;
 
     public Bullet(float x , float y , float radians ){
         this.x = x;
@@ -38,6 +39,7 @@ public class Bullet extends SpaceEntity {
         lifeTime = 1;
 
         bullet = new Sprite(new Texture("bullet.png"));
+        collision = new Collision(width , height);
     }
 
     public boolean shouldRemove(){return remove;}
@@ -48,9 +50,9 @@ public class Bullet extends SpaceEntity {
     }
 
     public void update(float dt){
+        checkAsteroidBulletCol();
         x += dx * dt;
         y += dy * dt;
-        BBox.checkProjectileCollision(x,x+width,y,y+height,this);
         wrap();
         lifeTimer += dt;
         if(lifeTimer > lifeTime){
@@ -58,6 +60,21 @@ public class Bullet extends SpaceEntity {
         }
     }
 
+    private void checkAsteroidBulletCol(){
+        for (int i = 0; i < PlayState.asteroids.size(); i++)
+        {
+            Asteroid asteroid = PlayState.asteroids.get(i);
+            if(collision.checkCollision(x,y,asteroid.getX(), asteroid.getY() ,
+                    asteroid.getW(),asteroid.getH()))
+            {
+                destroy();
+                System.out.println("bullet hit");
+                asteroid.destroy();
+                PlayState.asteroids.remove(i);
+                i --;
+            }
+        }
+    }
 
 
     @Override
@@ -82,6 +99,6 @@ public class Bullet extends SpaceEntity {
 
     @Override
     public void destroy() {
-
+        remove = true;
     }
 }

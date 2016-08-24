@@ -6,9 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.michaels.main.BBox;
 import com.michaels.main.Game;
 import com.michaels.managers.GameInputProcessor;
 
@@ -81,10 +79,6 @@ public class Player extends SpaceEntity {
 
     public void move(float dt){
 
-        if(BBox.checkProjectileCollision(x,x + width , y , y + height , this))
-        {
-
-        }
 
         if(GameInputProcessor.up){
             dx += accel * Math.cos(MathUtils.degreesToRadians * degrees) * dt;

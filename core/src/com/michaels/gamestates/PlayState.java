@@ -42,7 +42,7 @@ public class PlayState extends GameState {
 
     private void spawnAsteroids() {
         asteroids.clear();
-        int numberToSpawn = 4 + level - 1;
+        int numberToSpawn = 2 + level - 1;
         for (int i = 0; i < numberToSpawn; i++) {
 
             float x = MathUtils.random(Gdx.graphics.getWidth());
