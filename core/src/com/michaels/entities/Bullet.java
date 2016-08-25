@@ -68,10 +68,8 @@ public class Bullet extends SpaceEntity {
                     asteroid.getW(),asteroid.getH()))
             {
                 destroy();
-                System.out.println("bullet hit");
                 asteroid.destroy();
                 PlayState.asteroids.remove(i);
-                i --;
             }
         }
     }

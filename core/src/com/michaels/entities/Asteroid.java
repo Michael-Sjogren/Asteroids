@@ -92,9 +92,12 @@ public class Asteroid extends SpaceEntity {
                 if(collision.checkCollision(x,y,asteroid.getX(), asteroid.getY() ,
                         asteroid.getW(),asteroid.getH()))
                 {
-                    System.out.println("asteroid on asteroid");
-
-
+                    float prexDx = dx;
+                    float prexDy = dy;
+                    dx = asteroid.getDx();
+                    dy = asteroid.getDy();
+                    asteroid.setDx(prexDx);
+                    asteroid.setDy(prexDy);
                 }
             }
 
@@ -104,17 +107,19 @@ public class Asteroid extends SpaceEntity {
     public void destroy() {
         player = null;
         asteroid.getTexture().dispose();
-        switch (size){
-            case LARGE:
 
+        switch (size)
+        {
+            case LARGE:
                 for (int i = 0; i < 2; i ++){
 
-                    PlayState.asteroids.add(new Asteroid(x,y,MEDIUM,player));
+                    PlayState.asteroids.add(new Asteroid(x + width * i , y + height * i , MEDIUM,player));
                 }
                 break;
             case MEDIUM:
                 for (int i = 0; i < 2; i ++){
-                    PlayState.asteroids.add(new Asteroid(x,y,SMALL,player));
+
+                    PlayState.asteroids.add(new Asteroid( x + width * i , y + height * i ,SMALL,player));
                 }
                 break;
 
