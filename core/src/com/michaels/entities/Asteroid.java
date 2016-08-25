@@ -23,7 +23,7 @@ public class Asteroid extends SpaceEntity {
     private int orginX , orginY;
     private Sprite asteroid;
     private Player player;
-    private boolean isDestroyed;
+
 
 
 
@@ -36,21 +36,21 @@ public class Asteroid extends SpaceEntity {
         switch (size)
         {
             case LARGE: asteroid = new Sprite(new Texture("asteroid-large.png"));
-                speed = MathUtils.random(50,100);
+                speed = MathUtils.random(30,75);
                 break;
             case MEDIUM: asteroid = new Sprite(new Texture("asteroid-medium.png"));
-                speed = MathUtils.random(100,150);
+                speed = MathUtils.random(75,130);
                 break;
 
             case SMALL:  asteroid = new Sprite(new Texture("asteroid_small.png"));
-                speed = MathUtils.random(150,175);
+                speed = MathUtils.random(130,150);
                 break;
             default: break;
         }
 
         width = asteroid.getWidth();
         height = asteroid.getHeight();
-        isDestroyed = false;
+
         rotSpeed = MathUtils.random(-5f,5f);
         orginX = asteroid.getTexture().getWidth() / 2;
         orginY = asteroid.getTexture().getHeight() / 2;
@@ -82,7 +82,6 @@ public class Asteroid extends SpaceEntity {
             x += dx * dt;
             y += dy * dt;
             asteroidOnAsteroidCol();
-
     }
 
     private void asteroidOnAsteroidCol(){
@@ -107,21 +106,20 @@ public class Asteroid extends SpaceEntity {
         asteroid.getTexture().dispose();
         switch (size){
             case LARGE:
-                isDestroyed = true;
+
                 for (int i = 0; i < 2; i ++){
 
                     PlayState.asteroids.add(new Asteroid(x,y,MEDIUM,player));
                 }
                 break;
             case MEDIUM:
-                isDestroyed = true;
                 for (int i = 0; i < 2; i ++){
                     PlayState.asteroids.add(new Asteroid(x,y,SMALL,player));
                 }
                 break;
 
             case SMALL:
-                    isDestroyed =  true;
+
                 break;
             default: break;
         }

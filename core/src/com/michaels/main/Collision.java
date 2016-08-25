@@ -19,15 +19,11 @@ import java.util.ArrayList;
  */
 public class Collision
 {
-    private final float width;
-    private final float height;
-    private SpaceEntity entity;
+
     private Rectangle r1 ,r2;
 
     public Collision(float width , float height)
     {
-        this.width = width;
-        this.height = height;
         r1 = new Rectangle();
         r2 = new Rectangle();
         r1.setWidth(width);
@@ -43,7 +39,6 @@ public class Collision
         r1.setY(y);
         r2.setX(otherX);
         r2.setY(otherY);
-
 
         if(Intersector.overlaps(r1,r2))
         {
